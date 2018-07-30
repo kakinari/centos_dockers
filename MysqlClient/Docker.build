@@ -1,0 +1,10 @@
+#!/bin/bash
+
+docker build --rm -t kakinari/centos:mysql-base .
+docker run --privileged --rm --name=mysql kakinari/centos:mysql-base &
+sleep 10
+docker export mysql | docker import -c "VOLUME [ \"/sys/fs/cgroup\" ]" -c "CMD [\"/usr/sbin/init\"]" -c "WORKDIR /root" -m "Mysql Client" - kakinari/centos:mysql-client
+docker image rm -f kakinari/centos:mysql-base
+docker stop mysql
+docker system prune -f
+
