@@ -2,7 +2,7 @@
 
 I store Dockerfile and Docker.build files of kakubari/centos Docker HUB images, here.
 Please use following command for pulling images.
-  docker pull kakinari/centos:<tagName>
+#####  docker pull kakinari/centos:<tagName>
 
 ## Tag:
 ###    7-ja: 
