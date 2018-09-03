@@ -42,6 +42,19 @@ Please use following command for pulling images.
         - group install Development tools with yum command.
         - install  ant, cmake3, openjdk-1.8.0-devel with yum command.
 
+###    ant-ja:
+####   Ant, subversion and Git Java Development Environment  on the 7-ja image. 
+      - Java 1.8.0.181 JDK
+      - Ant 1.9.2
+      - subversion 1.7.14
+      - Git 1.8.3.1
+
+###    tomcat-ja:
+####   Tomcat 8.5.32 on the 7-ja image. 
+       Latest Tomcat image on the Japanese environment.
+       Tomcat set auto-start at container runs..
+       Java 1.8.0.181 jre base.
+
 ###     mysql-client-ja:
 ####   MysqlClient folder:
        MySQL Client CLI  on the 7-ja image. 
