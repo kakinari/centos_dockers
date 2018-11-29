@@ -17,5 +17,6 @@ cp -f /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 ENV LANG ja_JP.UTF-8
 ENV LANGUAGE ja_JP:ja
 ENV LC_ALL ja_JP.UTF-8
+ENV TZ JST-9
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init"]

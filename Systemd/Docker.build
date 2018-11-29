@@ -9,6 +9,7 @@ sudo docker export cent7-ja | sudo docker import \
     -c "ENV LANG ja_JP.UTF-8" \
     -c "ENV LANGUAGE ja_JP:ja" \
     -c "ENV LC_ALL ja_JP.UTF-8" \
+    -c "ENV TZ JST-9" \
     -c "CMD [\"/usr/sbin/init\"]" \
     -c "WORKDIR /root" \
     -m "Japanese CentOS 7 with systemd" \
