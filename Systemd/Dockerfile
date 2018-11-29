@@ -5,7 +5,8 @@ systemd-tmpfiles-setup.service ] || rm -f $i; done; cd /;\
 sed -i '/^override_install_langs=/d' /etc/yum.conf;\
 sed -i 's/.*/LANG=ja_JP.UTF-8\nLANGUAGE=ja_JP:ja/' /etc/locale.conf;\
 yum -y reinstall glibc-common;\
-yum upgrade; yum clean all); \
+yum -y upgrade; yum -y clean all); \
+rm -rf /var/cache/yum/*;\
 rm -f /lib/systemd/system/multi-user.target.wants/*;\
 rm -f /etc/systemd/system/*.wants/*;\
 rm -f /lib/systemd/system/local-fs.target.wants/*; \
@@ -18,5 +19,5 @@ ENV LANG ja_JP.UTF-8
 ENV LANGUAGE ja_JP:ja
 ENV LC_ALL ja_JP.UTF-8
 ENV TZ JST-9
-VOLUME [ "/sys/fs/cgroup" ]
-CMD ["/usr/sbin/init"]
+VOLUME /sys/fs/cgroup
+CMD /usr/sbin/init
