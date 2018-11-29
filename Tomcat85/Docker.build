@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo docker build --rm -t tomcat-ja:base .
-sudo docker run --privileged --rm --name=tomcat-ja tomcat-ja:base &
+sudo docker run --privileged --rm -p 48080:8080 --name=tomcat-ja tomcat-ja:base &
 sleep 10
 docker exec tomcat-ja systemctl enable tomcat
 docker exec tomcat-ja systemctl start tomcat
