@@ -4,7 +4,7 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
 systemd-tmpfiles-setup.service ] || rm -f $i; done; cd /;\
 sed -i '/^override_install_langs=/d' /etc/yum.conf;\
 sed -i 's/.*/LANG=ja_JP.UTF-8\nLANGUAGE=ja_JP:ja/' /etc/locale.conf;\
-yum -y reinstall glibc-common;\
+yum -y --nogpgcheck reinstall glibc-common;\
 yum -y upgrade; yum -y clean all); \
 rm -rf /var/cache/yum/*;\
 rm -f /lib/systemd/system/multi-user.target.wants/*;\
