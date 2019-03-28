@@ -1,8 +1,9 @@
 #!/bin/bash
-
 docker build --rm -t kakinari/centos:mysql-base .
-docker run --privileged --rm --name=mysql kakinari/centos:mysql-base &
+docker run --privileged --rm --name=mysql -d kakinari/centos:mysql-base
 sleep 10
+docker exec mysql systemctl stop mysqld
+docker exec mysql rm -rf /var/lib/mysql/*
 docker export mysql | docker import \
     -c "VOLUME /sys/fs/cgroup"\
     -c "ENV container docker" \
@@ -14,7 +15,7 @@ docker export mysql | docker import \
     -c "WORKDIR /root" \
     -m "Mysql Client" \
     - \
-    kakinari/centos:mysqld-80-jas
+    kakinari/centos:mysqld-8.0
 docker stop mysql
 docker image rm -f kakinari/centos:mysql-base
 docker image rm -f kakinari/centos:7-ja
