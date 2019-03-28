@@ -1,0 +1,16 @@
+#!/bin/bash
+
+docker build --rm -t ant-ja:base .
+docker run --privileged --rm --name=ant-ja ant-ja:base &
+sleep 10
+docker export ant-ja | docker import  \
+		-c "VOLUME /sys/fs/cgroup" \
+		-c "CMD /usr/sbin/init" \
+		-c "WORKDIR /root" \
+		-c "ENV LANG=ja_JP.UTF-8 LANGUAGE=ja_JP:ja LC_ALL=ja_JP.UTF-8 TZ=JST-9" \
+		-m "Apache Ant Build environment with ja"\
+		- kakinari/centos:ant-ja
+docker stop ant-ja
+docker image rm -f ant-ja:base
+docker image rm -f kakinari/centos:jdk-1.8.0-ja
+docker system prune -f

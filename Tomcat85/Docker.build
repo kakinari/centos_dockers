@@ -1,0 +1,25 @@
+#!/bin/bash
+
+sudo docker build --rm -t tomcat-ja:base .
+sudo docker run --privileged --rm -p 48080:8080 --name=tomcat-ja tomcat-ja:base &
+sleep 10
+docker exec tomcat-ja systemctl enable tomcat
+docker exec tomcat-ja systemctl start tomcat
+docker export tomcat-ja | docker import  \
+	-c "VOLUME /sys/fs/cgroup" \
+	-c "CMD /usr/sbin/init" \
+	-c "WORKDIR /root" \
+	-c "ENV container docker" \
+	-c "ENV LANG=ja_JP.UTF-8" \
+	-c "ENV LANGUAGE=ja_JP:ja" \
+	-c "ENV TZ=JST-9" \
+	-c "ENV LC_ALL=ja_JP.UTF-8" \
+	-c "ENV CATALINA_HOME=/opt/apache-tomcat-8.5.31" \
+	-c "ENV CATALINA_BASE=/opt/tomcat" \
+	-c "ENV JAVA_HOME=/usr/lib/jvm/jre-1.8.0"\
+	-m "Apache Tomcat 8.5 environment with ja and jre 1.8"\
+	- kakinari/centos:tomcat-ja
+docker stop tomcat-ja
+docker image rm -f tomcat-ja:base
+docker image rm -f kakinari/centos:jre-1.8.0-ja
+docker system prune -f
