@@ -1,9 +1,9 @@
 #!/bin/bash
 docker build --rm -t kakinari/centos:mysql-base .
 docker run --privileged --rm --name=mysql -d kakinari/centos:mysql-base
+docker exec mysql mv /root/mysqld.service /etc/systemd/system/multi-user.target.wants
+docker exec mysql systemctl enable mysqld.service
 sleep 10
-docker exec mysql systemctl stop mysqld
-docker exec mysql rm -rf /var/lib/mysql/*
 docker export mysql | docker import \
     -c "VOLUME /sys/fs/cgroup"\
     -c "ENV container docker" \

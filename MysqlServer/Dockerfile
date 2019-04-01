@@ -6,6 +6,7 @@ yum -y install --nogpgcheck mysql-community-server;\
 yum upgrade -y;\
 yum clean all; \
 rm -rf /var/cache/yum/*; \
+mv /etc/systemd/system/multi-user.target.wants/* /root ; \
 chmod +x /root/setRootPassword;
 VOLUME /sys/fs/cgroup
 CMD /usr/sbin/init
