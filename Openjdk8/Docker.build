@@ -1,0 +1,44 @@
+#!/bin/bash
+if [[ "$1" = "--devel" ]]
+then
+   devel="-devel";
+   shift;
+fi
+export VERSION=${VERSION:-1.8.0}
+export TARGET=java-${VERSION}-openjdk$devel
+docker build --build-arg TARGET=${TARGET} --rm -t openjdk:openjdk-ja-base .
+docker run --privileged --rm --name=openjdk openjdk:openjdk-ja-base &
+sleep 10
+if [[ "$devel" = "" ]]
+then
+    docker export openjdk | docker import \
+        -c "VOLUME /sys/fs/cgroup" \
+        -c "ENV container docker" \
+        -c "ENV LANG ja_JP.UTF-8" \
+        -c "ENV LANGUAGE ja_JP:ja" \
+        -c "ENV LC_ALL ja_JP.UTF-8" \
+        -c "ENV TZ JST-9" \
+        -c "ENV JAVA_HOME /usr/lib/jvm/jre-${VERSION}" \
+        -c "CMD /usr/sbin/init" \
+	-c "WORKDIR /root" \
+        -m "Japanese OpenJDK ${VERSION} Runtime with systemd" \
+        - kakinari/centos:jre-${VERSION}-ja
+else
+    docker export openjdk | docker import \
+        -c "VOLUME /sys/fs/cgroup" \
+        -c "ENV container docker" \
+        -c "ENV LANG ja_JP.UTF-8" \
+        -c "ENV LANGUAGE ja_JP:ja" \
+        -c "ENV LC_ALL ja_JP.UTF-8" \
+        -c "ENV TZ JST-9" \
+        -c "ENV JAVA_HOME /usr/lib/jvm/java-${VERSION}" \
+        -c "CMD /usr/sbin/init" \
+	-c "WORKDIR /root" \
+        -m "Japanese OpenJDK ${VERSION} Develop with systemd" \
+        - kakinari/centos:jdk-${VERSION}-ja
+fi
+docker stop openjdk
+docker image rm -f openjdk:openjdk-ja-base
+docker image rm -f kakinari/centos:7-ja
+docker system prune -f
+
