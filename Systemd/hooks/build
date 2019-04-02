@@ -13,7 +13,8 @@ docker export cent7-ja | docker import \
     -c "CMD /usr/sbin/init" \
     -c "WORKDIR /root" \
     -m "Japanese CentOS 7 with systemd" \
-    - kakinari/centos:7-ja
+    - kakinari/centos-ja:7
+docker kakinari/centos-ja:7 kakinari/centos-ja:latest
 docker stop cent7-ja
 docker image rm -f centos:7-ja-base
 docker image rm -f centos:7
