@@ -1,4 +1,4 @@
-FROM kakinari/centos:7-ja
+FROM kakinari/centos-ja:latest
 ARG TARGET=java-1.8.0-openjdk
 ENV container docker
 RUN yum -y install ${TARGET};\
