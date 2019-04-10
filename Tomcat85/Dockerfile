@@ -27,6 +27,8 @@ mv /opt/log4j.properties $CATALINA_HOME/lib/;\
 rm -rf $CATALINA_HOME/webapps/*;\
 chmod +x $CATALINA_HOME/bin/*.sh;\
 rm -f $CATALINA_HOME.zip;\
+rm -f $CATALINA_HOME/[A-Z]*\
+rm -f $CATALINA_HOME/bin/*.bat\
 ln -s /etc/systemd/system/tomcat.service /etc/systemd/system/multi-user.target.wants/tomcat.service;
 EXPOSE 8080
 VOLUME /sys/fs/cgroup
