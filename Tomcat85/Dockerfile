@@ -1,8 +1,8 @@
 FROM kakinari/centos:jre-1.8.0-ja
 ENV container docker
-ENV CATALINA_HOME=/opt/apache-tomcat-8.5.31
+ENV CATALINA_VERSION=8.5.39
+ENV CATALINA_HOME=/opt/apache-tomcat-${CATALINA_VERSION}
 ENV CATALINA_BASE=/opt/tomcat
-COPY apache-tomcat-8.5.31.zip /opt/
 COPY log4j.properties /opt/
 COPY tomcat.service /etc/systemd/system/
 RUN yum -y install unzip;\
@@ -12,6 +12,7 @@ rm -rf /var/cache/yum/*;\
 groupadd -g 1000 apache;\
 useradd -u 1000 -g 1000 tomcat;\
 (cd /opt ;\
+curl -O http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/tomcat/tomcat-8/v${CATALINA_VERSION}/bin/apache-tomcat-${CATALINA_VERSION}.zip;\
 unzip $CATALINA_HOME.zip);\
 mkdir $CATALINA_BASE;\
 (cd $CATALINA_BASE; mkdir bin conf logs webapps lib work temp;\
