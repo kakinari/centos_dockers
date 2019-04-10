@@ -1,4 +1,4 @@
-FROM kakinari/centos:jre-1.8.0-ja
+FROM kakinari/openjdk-ja:jre-1.8.0
 ENV container docker
 ENV CATALINA_VERSION=8.5.39
 ENV CATALINA_HOME=/opt/apache-tomcat-${CATALINA_VERSION}
