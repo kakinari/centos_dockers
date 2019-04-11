@@ -3,8 +3,8 @@
 docker build --rm -t tomcat-ja:base .
 docker run --privileged --rm -d -p 38080:8080 --name=tomcat-ja tomcat-ja:base
 sleep 10
-# docker exec tomcat-ja systemctl enable tomcat
-# docker exec tomcat-ja systemctl start tomcat
+docker exec tomcat-ja systemctl stop tomcat
+docker exec tomcat-ja rm -rf /opt/tomcat/logs/*
 docker export tomcat-ja | docker import  \
 	-c "VOLUME /sys/fs/cgroup" \
 	-c "CMD /usr/sbin/init" \
@@ -20,7 +20,7 @@ docker export tomcat-ja | docker import  \
 	-m "Apache Tomcat 8.5 environment with ja and jre 1.8"\
 	- kakinari/tomcat-ja:8.5.39
 docker tag kakinari/tomcat-ja:8.5.39 kakinari/tomcat-ja:latest
-# docker stop tomcat-ja
+docker stop tomcat-ja
 docker image rm -f tomcat-ja:base
 docker image rm -f kakinari/openjdk-ja:jre-1.8.0
 docker system prune -f
