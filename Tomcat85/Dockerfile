@@ -12,7 +12,7 @@ rm -rf /var/cache/yum/*;\
 groupadd -g 1000 apache;\
 useradd -u 1000 -g 1000 tomcat;\
 (cd /opt ;\
-curl -O http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/tomcat/tomcat-8/v${CATALINA_VERSION}/bin/apache-tomcat-${CATALINA_VERSION}.zip;\
+curl -O http://archive.apache.org/dist/tomcat/tomcat-8/v${CATALINA_VERSION}/bin/apache-tomcat-${CATALINA_VERSION}.zip;\
 unzip $CATALINA_HOME.zip);\
 mkdir $CATALINA_BASE;\
 (cd $CATALINA_BASE; mkdir bin conf logs webapps lib work temp;\
