@@ -9,7 +9,7 @@ docker export cent-ja | docker import \
     -c "ENV LANGUAGE ja_JP:ja" \
     -c "ENV LC_ALL ja_JP.UTF-8" \
     -c "ENV TZ JST-9" \
-    -c "CMD [ \"/usr/sbin/init\" ] \
+    -c "CMD [ \"/usr/sbin/init\" ] " \
     -c "WORKDIR /root" \
     -m "Japanese CentOS 8 with systemd" \
     - kakinari/centos-ja:8
