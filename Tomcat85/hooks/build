@@ -14,12 +14,12 @@ docker export tomcat-ja | docker import  \
 	-c "ENV LANGUAGE=ja_JP:ja" \
 	-c "ENV TZ=JST-9" \
 	-c "ENV LC_ALL=ja_JP.UTF-8" \
-	-c "ENV CATALINA_HOME=/opt/apache-tomcat-8.5.39" \
+	-c "ENV CATALINA_HOME=/opt/tomcat_home" \
 	-c "ENV CATALINA_BASE=/opt/tomcat" \
 	-c "ENV JAVA_HOME=/usr/lib/jvm/jre-1.8.0"\
 	-m "Apache Tomcat 8.5 environment with ja and jre 1.8"\
-	- kakinari/tomcat-ja:8.5.39
-docker tag kakinari/tomcat-ja:8.5.39 kakinari/tomcat-ja:latest
+	- kakinari/tomcat-ja:8.5.57
+docker tag kakinari/tomcat-ja:8.5.57 kakinari/tomcat-ja:latest
 docker stop tomcat-ja
 docker image rm -f tomcat-ja:base
 docker image rm -f kakinari/openjdk-ja:jre-1.8.0

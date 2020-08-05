@@ -9,14 +9,14 @@ Group=apache
 UMask=0007
 Type=oneshot
 Environment=JAVA_HOME=/usr/lib/jvm/jre-1.8.0
-Environment=CATALINA_HOME=/opt/apache-tomcat-8.5.39
+Environment=CATALINA_HOME=/opt/tomcat_home
 Environment=CATALINA_BASE=/opt/tomcat
 Environment=CATALINA_PID=/opt/tomcat/temp/tomcat.pid
 RemainAfterExit=yes
 
-ExecStart=/opt/apache-tomcat-8.5.39/bin/startup.sh
-ExecStop=/opt/apache-tomcat-8.5.39/bin/shutdown.sh
-ExecReStart=/opt/apache-tomcat-8.5.39/bin/shutdown.sh;sleep 10;/opt/apache-tomcat-8.5.39/bin/startup.sh
+ExecStart=/opt/tomcat_home/bin/startup.sh
+ExecStop=/opt/tomcat_home/bin/shutdown.sh
+ExecReStart=/opt/tomcat_home/bin/shutdown.sh;sleep 10;/opt/tomcat_home/bin/startup.sh
 
 [Install]
 WantedBy=multi-user.target
