@@ -13,6 +13,7 @@ docker export cent-ja | docker import \
     -c "WORKDIR /root" \
     -m "Japanese CentOS 8 with systemd" \
     - kakinari/centos-ja:8
+docker tag kakinari/centos-ja:8 kakinari/centos-ja:latest
 docker stop cent-ja
 docker image rm -f centos:ja-base
 docker image rm -f centos:8

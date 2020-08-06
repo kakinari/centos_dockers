@@ -1,7 +1,7 @@
 FROM centos:8
 ENV container docker
-RUN yum -y install glibc-langpack-ja;\
-yum -y upgrade; yum -y clean all; \
+RUN dnf -y install glibc-langpack-ja;\
+dnf -y upgrade; dnf -y clean all; \
 rm -rf /var/cache/yum/*;\
 sed -i 's/.*/LANG=ja_JP.UTF-8\nLANGUAGE=ja_JP:ja/' /etc/locale.conf;
 ENV LANG ja_JP.UTF-8
