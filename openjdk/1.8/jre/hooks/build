@@ -12,7 +12,7 @@ docker export openjdk | docker import \
 	-c "CMD [\"/usr/sbin/init\"]" \
 	-c "WORKDIR /root" \
 	-m "Japanese OpenJDK 1.8.0 Runtime with systemd 8" \
-	- kakinari/openjdk-ja:jre-1.8.0
+	- kakinari/openjdk-ja:jre-1.8
 docker stop openjdk
 docker image rm -f openjdk:openjdk-ja-base
 docker image rm -f kakinari/centos-ja:8
