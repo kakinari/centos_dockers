@@ -1,0 +1,20 @@
+#!/bin/bash
+docker build --build-arg TARGET=java-1.8.0-openjdk --rm -t openjdk:openjdk-ja-base .
+docker run --privileged --rm -d --name=openjdk openjdk:openjdk-ja-base
+sleep 10
+docker export openjdk | docker import \
+	-c "ENV container docker" \
+	-c "ENV LANG ja_JP.UTF-8" \
+	-c "ENV LANGUAGE ja_JP:ja" \
+	-c "ENV LC_ALL ja_JP.UTF-8" \
+	-c "ENV TZ JST-9" \
+	-c "ENV JAVA_HOME /usr/lib/jvm/jre-1.8.0" \
+	-c "CMD [\"/usr/sbin/init\"]" \
+	-c "WORKDIR /root" \
+	-m "Japanese OpenJDK 1.8.0 Runtime with systemd 8" \
+	- kakinari/openjdk-ja:jre-1.8.0
+docker stop openjdk
+docker image rm -f openjdk:openjdk-ja-base
+docker image rm -f kakinari/centos-ja:8
+docker system prune -f
+
