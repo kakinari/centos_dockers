@@ -13,7 +13,7 @@ docker export mysql | docker import \
     -c "WORKDIR /root" \
     -m "Mysql Client" \
     - \
-    kakinari/mysql-ja:client-8.0
+    kakinari/mysql-ja:client-80
 docker stop mysql
 docker image rm -f kakinari/centos:mysql-base
 docker image rm -f kakinari/centos-ja:8
