@@ -15,7 +15,7 @@ docker export mysql | docker import \
     -m "Mysql Server 8.0" \
     - \
     kakinari/mysql-ja:server-80
-docker tag kakinari/mysql-ja:server-8.0 kakinari/mysql-ja:latest
+docker tag kakinari/mysql-ja:server-80 kakinari/mysql-ja:latest
 docker stop mysql
 docker image rm -f kakinari/centos:mysql-base
 docker image rm -f kakinari/centos-ja:8

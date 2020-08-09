@@ -1,4 +1,4 @@
-FROM kakinari/centos-ja:latest
+FROM kakinari/centos-ja:8
 ENV container docker
 COPY setRootPassword /root/setRootPassword
 RUN dnf -y upgrade;\
