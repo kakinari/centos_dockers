@@ -21,5 +21,5 @@ docker export tomcat-ja | docker import  \
 # docker tag kakinari/tomcat-ja:9.0.37 kakinari/tomcat-ja:latest
 docker stop tomcat-ja
 docker image rm -f tomcat-ja:base
-docker image rm -f kakinari/openjdk-ja:jre-1.8.0
+docker image rm -f kakinari/openjdk-ja:jre-1.8
 docker system prune -f
