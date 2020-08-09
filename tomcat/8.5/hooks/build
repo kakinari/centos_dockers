@@ -3,7 +3,8 @@
 docker build --rm -t tomcat-ja:base .
 docker run --privileged --rm -d -p 38080:8080 --name=tomcat-ja tomcat-ja:base
 sleep 10
-docker exec tomcat-ja systemctl stop tomcat
+docker exec tomcat-ja /opt/tomcat_home/bin/shutdown.sh
+sleep 3
 docker exec tomcat-ja rm -rf /opt/tomcat/logs/*
 docker export tomcat-ja | docker import  \
 	-c "CMD /usr/sbin/init" \
