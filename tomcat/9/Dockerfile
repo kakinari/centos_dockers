@@ -1,11 +1,12 @@
 FROM kakinari/openjdk-ja:jre-1.8
-ENV container docker
-ENV CATALINA_VERSION=9.0.37
+ENV CATALINA_VERSION=9.0.39
 ENV CATALINA_HOME=/opt/tomcat_home
 ENV CATALINA_BASE=/opt/tomcat
 COPY log4j.properties /opt/
 COPY tomcat.service /etc/systemd/system/
-RUN dnf -y upgrade;\
+EXPOSE 8080
+RUN dnf -y update;\
+dnf -y upgrade;\
 dnf -y install unzip;\
 dnf -y clean all; \
 rm -rf /var/cache/dnf/*;\
@@ -33,6 +34,3 @@ rm -f $CATALINA_HOME/[A-Z]*;\
 rm -f $CATALINA_HOME/bin/*.bat;\
 rm -f $CATALINA_HOME/bin/*.tar.gz;\
 ln -s /etc/systemd/system/tomcat.service /etc/systemd/system/multi-user.target.wants/tomcat.service;
-EXPOSE 8080
-VOLUME /sys/fs/cgroup
-CMD [ "/usr/sbin/init" ]

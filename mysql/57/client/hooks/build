@@ -1,21 +1,2 @@
 #!/bin/bash
-
-docker build --rm -t kakinari/centos:mysql-base .
-docker run --privileged --rm --name=mysql kakinari/centos:mysql-base &
-sleep 10
-docker export mysql | docker import \
-    -c "ENV container docker" \
-    -c "ENV LANG ja_JP.UTF-8" \
-    -c "ENV LANGUAGE ja_JP:ja" \
-    -c "ENV LC_ALL ja_JP.UTF-8" \
-    -c "ENV TZ JST-9" \
-    -c "CMD /usr/sbin/init" \
-    -c "WORKDIR /root" \
-    -m "Mysql Client" \
-    - \
-    kakinari/mysql-ja:client-57
-docker stop mysql
-docker image rm -f kakinari/centos:mysql-base
-docker image rm -f kakinari/centos-ja:7
-docker system prune -f
-
+docker buildx build --platform linux/amd64,linux/arm64 --push -t kakinari/mysql-ja:client-57 .

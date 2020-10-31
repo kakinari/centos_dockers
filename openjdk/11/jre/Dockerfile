@@ -1,13 +1,3 @@
 FROM kakinari/centos-ja:8
 ARG TARGET=java-11-openjdk
-ENV container docker
-ENV LANG ja_JP.UTF-8
-ENV LANGUAGE ja_JP:ja
-ENV LC_ALL ja_JP.UTF-8
-ENV TZ JST-9
-RUN dnf -y upgrade;\
-dnf -y install ${TARGET};\
-dnf -y clean all;\
-rm -rf /var/cache/dnf/*;
-VOLUME /sys/fs/cgroup
-CMD [ "/usr/sbin/init" ]
+RUN dnf -y update;dnf -y upgrade;dnf -y install ${TARGET};rm -rf /var/cache/dnf/*;

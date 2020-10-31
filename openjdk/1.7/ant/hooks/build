@@ -1,21 +1,2 @@
 #!/bin/bash
-docker build --rm -t openjdk:openjdk-ja-base .
-docker run --privileged --rm -d --name=openjdk openjdk:openjdk-ja-base
-sleep 10
-docker export openjdk | docker import \
-	-c "ENV container docker" \
-	-c "ENV LANG ja_JP.UTF-8" \
-	-c "ENV LANGUAGE ja_JP:ja" \
-	-c "ENV LC_ALL ja_JP.UTF-8" \
-	-c "ENV TZ JST-9" \
-	-c "ENV ANT_HOME /opt/ant" \
-	-c "ENV JAVA_HOME /usr/lib/jvm/java-1.7.0" \
-	-c "CMD [\"/usr/sbin/init\"]" \
-	-c "WORKDIR /root" \
-	-m "Japanese OpenJDK 1.7.0 Develop with systemd 7 and Ant" \
-	- kakinari/openjdk-ja:jdk-ant-1.7
-docker stop openjdk
-docker image rm -f openjdk:openjdk-ja-base
-docker image rm -f kakinari/openjdk-ja:jdk-1.7
-docker system prune -f
-
+docker buildx build --platform linux/amd64,linux/arm64 -t kakinari/openjdk-ja:jdk-ant-1.7 --push .
