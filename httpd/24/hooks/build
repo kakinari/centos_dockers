@@ -1,5 +1,4 @@
 #!/bin/bash
 docker buildx ls
-docker buildx install
+docker buildx create --name builds
 docker buildx build --platform linux/amd64,linux/arm64 -t kakinari/httpd-ja:24 --push .
-docker buildx uninstall
