@@ -21,15 +21,14 @@ mkdir $CATALINA_BASE);\
 touch bin/setenv.sh;\
 chmod +x bin/setenv.sh;\
 cp $CATALINA_HOME/bin/tomcat-juli.jar bin;\
-cp -r $CATALINA_HOME/webapps/* webapps;\
+mv -r $CATALINA_HOME/webapps/* webapps;\
 cp -r $CATALINA_HOME/conf/* conf;\
 cp -r $CATALINA_HOME/lib/* lib);\
+mv /opt/log4j.properties $CATALINA_HOME/lib/;\
 chown -R tomcat:apache $CATALINA_HOME;\
 chown -R tomcat:apache $CATALINA_BASE;\
-mv /opt/log4j.properties $CATALINA_HOME/lib/;\
-rm -rf $CATALINA_HOME/webapps/*;\
 chmod +x $CATALINA_HOME/bin/*.sh;\
-rm -f /opt/*.zip;\
+rm -f /opt/*.tar.gz;\
 rm -f $CATALINA_HOME/[A-Z]*;\
 rm -f $CATALINA_HOME/bin/*.bat;\
 rm -f $CATALINA_HOME/bin/*.tar.gz;\
